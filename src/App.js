@@ -1,26 +1,70 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import axios from "axios";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+//Components
+import Navb from "./components/Navbar";
+import ListTitles from "./components/ListTitles";
+import Users from "./components/Users";
+import AddUser from "./components/AddUser";
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+      showAddForm: false
+    };
+    this.changeShowAddForm = this.changeShowAddForm.bind(this);
+    this.updateUsers = this.updateUsers.bind(this);
+  }
+
+  changeShowAddForm() {
+    this.setState({
+      showAddForm: !this.state.showAddForm
+    });
+  }
+
+  async updateUsers() {
+    await axios
+      .get("http://localhost:8081/user/")
+      .then(res => {
+        this.setState({
+          users: res.data
+        });
+      })
+      .catch(err => {
+        console.log("Update Users Error --> " + err);
+      });
+  }
+
+  async componentDidMount() {
+    await axios
+      .get("http://localhost:8081/user/")
+      .then(res => {
+        this.setState({
+          users: res.data
+        });
+      })
+      .catch(err => {
+        console.log("Get Users Error --> " + err);
+      });
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Navb changeShowAddForm={this.changeShowAddForm} />
+        <AddUser
+          showAddForm={this.state.showAddForm}
+          changeShowAddForm={this.changeShowAddForm}
+          updateUsers={this.updateUsers}
+        />
+        <ListTitles />
+        <Users users={this.state.users} updateUsers={this.updateUsers} />
+      </div>
+    );
+  }
 }
 
 export default App;

@@ -1,0 +1,22 @@
+.add-user-container {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  height: calc(100vh - 56px);
+  background-color: rgba(59, 58, 57, 0.7);
+  display: flex;
+  justify-content: center;
+}
+
+.form-new-user {
+  width: 50%;
+  height: 390px;
+  margin-top: 100px;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.form-off {
+  display: none;
+}

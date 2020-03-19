@@ -40,7 +40,9 @@ class App extends React.Component {
 
   async componentDidMount() {
     await axios
-      .get("http://localhost:8081/user/")
+      .get("http://localhost:8081/user/", {
+        headers: { "Access-Control-Allow-Origin": "*" }
+      })
       .then(res => {
         this.setState({
           users: res.data

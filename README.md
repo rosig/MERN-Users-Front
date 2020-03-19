@@ -1,3 +1,7 @@
+## Descrição
+
+Interface simples que mostra lista, adiciona, modifica e exclui usuários do Back-End [https://github.com/rosig/MERN-Users-Back].
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
